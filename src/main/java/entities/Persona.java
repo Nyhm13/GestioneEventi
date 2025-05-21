@@ -21,19 +21,19 @@ public class Persona {
     @Enumerated(EnumType.STRING)
     private Sesso sesso;
     @Column(name = "lista_partecipazioni")
-    @OneToMany(mappedBy = "persona")
+    @OneToMany(mappedBy = "persona")// ci ho scritto persona perche in Partecipazione c'è la proprietà che si chiama persona
     private List<Partecipazione> listaPartecipazioni;
 
     public Persona() {
     }
 
-    public Persona(String nome, String cognome, LocalDate dataDiNascita, String email, Sesso sesso, List<Partecipazione> listaPartecipazioni) {
+    public Persona(String nome, String cognome, LocalDate dataDiNascita, String email, Sesso sesso ) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita = dataDiNascita;
         this.email = email;
         this.sesso = sesso;
-        this.listaPartecipazioni = listaPartecipazioni;
+
     }
 
     public int getId() {

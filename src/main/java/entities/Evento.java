@@ -27,7 +27,7 @@ public class Evento {
     @JoinColumn(name = "location_id")// collegamento tra la tabella eventi e la tabella location, chiave esterna chiamata location_id,
     // che si lega alla tabella location tramite la chiave primaria id della tabella location
     private Location location;
-    @OneToMany(mappedBy = "evento")
+    @OneToMany(mappedBy = "evento")// un evento puo avere piu partecipazioni ma una partecipazione appartiene a un solo evento
 
     private List<Partecipazione> listaPartecipazioni;
 
@@ -101,15 +101,24 @@ public class Evento {
         this.location = location;
     }
 
+    public List<Partecipazione> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
+
+    public void setListaPartecipazioni(List<Partecipazione> listaPartecipazioni) {
+        this.listaPartecipazioni = listaPartecipazioni;
+    }
+
     @Override
     public String toString() {
-        return "entities.Evento{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataEvento=" + dataEvento +
-                ", descrizione='" + descrizione + '\'' +
-                ", enumeration.tipoEvento=" + tipoEvento +
+        return "Evento{" +
+                "location=" + location +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
+                ", tipoEvento=" + tipoEvento +
+                ", descrizione='" + descrizione + '\'' +
+                ", dataEvento=" + dataEvento +
+                ", nome='" + nome + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

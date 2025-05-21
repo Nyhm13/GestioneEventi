@@ -1,6 +1,10 @@
 package entities;
 
 import dao.EventoDAO;
+import dao.LocationDAO;
+import dao.PartecipazioneDAO;
+import dao.PersonaDAO;
+import enumeration.Sesso;
 import enumeration.tipoEvento;
 
 import java.time.LocalDate;
@@ -9,18 +13,44 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
 
-        EventoDAO eventoDAO= new EventoDAO();
+        EventoDAO eventoDAO=new EventoDAO();
+        PersonaDAO personaDAO= new PersonaDAO();
+        PartecipazioneDAO partecipazioneDAO= new PartecipazioneDAO();
+        LocationDAO locationDAO= new LocationDAO();
 
-        Evento evento1= new Evento(new Random().nextInt(1,1000),"Festa cado malato", LocalDate.of(2000,6,9),
-                "Festa dove volano corde e sgabelli", tipoEvento.PUBBLICO,100000);
-        try {
-            eventoDAO.save(evento1);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        Evento e1= new Evento("fiera",LocalDate.of(2000,1,1),"fiera di Roma",
+                tipoEvento.PUBBLICO,100);
 
-        System.out.println(eventoDAO.getById(evento1.getId()));
-        eventoDAO.delete(623);
+        Evento e2= new Evento("concerto",LocalDate.of(2020,1,12),"concerto di roma",
+                tipoEvento.PUBBLICO,100);
+
+        eventoDAO.save(e1);
+        eventoDAO.save(e2);
+
+
+
+        Location l1= new Location("Fiera rho","Milano");
+        Location l2= new Location("Piazza del popolo","Roma");
+
+        locationDAO.save(l1);
+        locationDAO.save(l2);
+
+        e1.setLocation(l1);
+        e2.setLocation(l2);
+
+        eventoDAO.save(e1);
+        eventoDAO.save(e2);
+
+
+        Persona p1= new Persona( "Marco","Rossi",LocalDate.of(2000,1,1),"cadomalato", Sesso.M);
+        Persona p2= new Persona( "Francesca","Bianchi",LocalDate.of(2020,1,21),"cadomalatomolto", Sesso.F);
+
+        personaDAO.save(p1);
+        personaDAO.save(p2);
+
+        Partecipazione part1= new
+
+
 
     }
 }

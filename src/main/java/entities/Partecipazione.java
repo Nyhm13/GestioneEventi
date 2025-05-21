@@ -9,7 +9,11 @@ public class Partecipazione {
     @Id
     @GeneratedValue
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "persona_id")
     private  Persona persona;
+    @ManyToOne// ManyToOne perche un evento può avere più partecipazioni ma una partecipazione appartiene a un solo evento
+    @JoinColumn(name = "evento_id")// collegamento tra la tabella partecipazioni e la tabella eventi, chiave esterna chiamata evento_id,
     private  Evento evento;
     @Enumerated(EnumType.STRING)
     private Stato stato;
@@ -18,10 +22,10 @@ public class Partecipazione {
     public Partecipazione() {
     }
 
-    public Partecipazione(Persona persona, Stato stato, Evento evento) {
+    public Partecipazione(Persona persona) {
         this.persona = persona;
-        this.stato = stato;
-        this.evento = evento;
+//        this.stato = stato;
+//        this.evento = evento;
     }
 
     public int getId() {
