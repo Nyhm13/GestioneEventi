@@ -1,10 +1,16 @@
+package entities;
+
+import enumeration.tipoEvento;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "eventi")
 public class Evento {
     @Id
+    @GeneratedValue
     private int id;
     @Column(length = 30)
     private String nome;
@@ -17,12 +23,21 @@ public class Evento {
     private tipoEvento tipoEvento;
     @Column(name = "numero_massimo_partecipanti")
     private int numeroMassimoPartecipanti;
+    @OneToOne // un evento ha una location
+    @JoinColumn(name = "location_id")// collegamento tra la tabella eventi e la tabella location, chiave esterna chiamata location_id,
+    // che si lega alla tabella location tramite la chiave primaria id della tabella location
+    private Location location;
+    @OneToMany(mappedBy = "evento")
+
+    private List<Partecipazione> listaPartecipazioni;
+
+
 
     public Evento() {
     }
 
-    public Evento(int id, String nome, LocalDate dataEvento, String descrizione, tipoEvento tipoEvento, int numeroMassimoPartecipanti) {
-        this.id = id;
+    public Evento( String nome, LocalDate dataEvento, String descrizione, tipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+//        this.id = id;
         this.nome = nome;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
@@ -78,14 +93,22 @@ public class Evento {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
-        return "Evento{" +
+        return "entities.Evento{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", dataEvento=" + dataEvento +
                 ", descrizione='" + descrizione + '\'' +
-                ", tipoEvento=" + tipoEvento +
+                ", enumeration.tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
                 '}';
     }

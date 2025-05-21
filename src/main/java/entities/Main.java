@@ -1,5 +1,9 @@
+package entities;
+
+import dao.EventoDAO;
+import enumeration.tipoEvento;
+
 import java.time.LocalDate;
-import java.util.EventObject;
 import java.util.Random;
 
 public class Main {
@@ -8,7 +12,7 @@ public class Main {
         EventoDAO eventoDAO= new EventoDAO();
 
         Evento evento1= new Evento(new Random().nextInt(1,1000),"Festa cado malato", LocalDate.of(2000,6,9),
-                "Festa dove volano corde e sgabelli",tipoEvento.PUBBLICO,100000);
+                "Festa dove volano corde e sgabelli", tipoEvento.PUBBLICO,100000);
         try {
             eventoDAO.save(evento1);
         }catch (Exception e){
@@ -16,7 +20,7 @@ public class Main {
         }
 
         System.out.println(eventoDAO.getById(evento1.getId()));
-//        eventoDAO.delete(evento1.getId());
+        eventoDAO.delete(623);
 
     }
 }
