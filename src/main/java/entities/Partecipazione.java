@@ -22,10 +22,8 @@ public class Partecipazione {
     public Partecipazione() {
     }
 
-    public Partecipazione(Persona persona) {
-        this.persona = persona;
-//        this.stato = stato;
-//        this.evento = evento;
+    public Partecipazione(Stato stato) {
+        this.stato = stato;
     }
 
     public int getId() {
